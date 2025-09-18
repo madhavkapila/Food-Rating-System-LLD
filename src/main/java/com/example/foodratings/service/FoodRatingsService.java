@@ -11,34 +11,30 @@ public class FoodRatingsService
     private Map<String, SortedSet<Foods>> rankings;
     private Map<String, Foods> foodsDetails;
 
-    @PostConstruct // Runs after the service is created and ready
-    public void init() 
+    public void addFood(String foodName, String cuisine, int rating) 
     {
-        rankings = new HashMap<>();
-        foodsDetails = new HashMap<>();
-        
-        String[] foods = {"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"};
-        String[] cuisines = {"korean", "japanese", "japanese", "greek", "japanese", "korean"};
-        int[] ratings = {9, 12, 8, 15, 14, 7};
-
-        int n = foods.length;
-        for (int i = 0; i < n; i++) 
+        // If the food already exists, treat this as a rating change.
+        if (foodsDetails.containsKey(foodName))
         {
-            Foods f = new Foods(foods[i], cuisines[i], ratings[i]);
-            
-            SortedSet<Foods> curr = rankings.getOrDefault(f.cuisine, 
-                new TreeSet<>((a, b) -> {
-                    int cmp = Integer.compare(b.rating, a.rating);
-                    if (cmp != 0) return cmp;
-                    return a.food.compareTo(b.food);
-                })
-            );
-
-            curr.add(f);
-            rankings.put(f.cuisine, curr);
-            foodsDetails.put(f.food, f);
+            changeRating(foodName, rating);
+            return;
         }
+        
+        Foods f = new Foods(foodName, cuisine, rating);
+        
+        SortedSet<Foods> curr = rankings.getOrDefault(f.cuisine, 
+            new TreeSet<>((a, b) -> {
+                int cmp = Integer.compare(b.rating, a.rating);
+                if (cmp != 0) return cmp;
+                return a.food.compareTo(b.food);
+            })
+        );
+
+        curr.add(f);
+        rankings.put(f.cuisine, curr);
+        foodsDetails.put(f.food, f);
     }
+
     
     public void changeRating(String food, int newRating) 
     {
@@ -60,4 +56,33 @@ public class FoodRatingsService
         }
         return rankings.get(cuisine).first().food;
     }
+
+    // @PostConstruct // Runs after the service is created and ready
+    // public void init() 
+    // {
+    //     rankings = new HashMap<>();
+    //     foodsDetails = new HashMap<>();
+        
+    //     String[] foods = {"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"};
+    //     String[] cuisines = {"korean", "japanese", "japanese", "greek", "japanese", "korean"};
+    //     int[] ratings = {9, 12, 8, 15, 14, 7};
+
+    //     int n = foods.length;
+    //     for (int i = 0; i < n; i++) 
+    //     {
+    //         Foods f = new Foods(foods[i], cuisines[i], ratings[i]);
+            
+    //         SortedSet<Foods> curr = rankings.getOrDefault(f.cuisine, 
+    //             new TreeSet<>((a, b) -> {
+    //                 int cmp = Integer.compare(b.rating, a.rating);
+    //                 if (cmp != 0) return cmp;
+    //                 return a.food.compareTo(b.food);
+    //             })
+    //         );
+
+    //         curr.add(f);
+    //         rankings.put(f.cuisine, curr);
+    //         foodsDetails.put(f.food, f);
+    //     }
+    // }
 }

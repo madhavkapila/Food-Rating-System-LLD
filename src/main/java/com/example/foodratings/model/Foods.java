@@ -6,7 +6,8 @@ public class Foods
     public String cuisine;
     public int rating;
 
-    public Foods(String f, String c, int r) {
+    public Foods(String f, String c, int r) 
+    {
         this.food = f;
         this.cuisine = c;
         this.rating = r;
