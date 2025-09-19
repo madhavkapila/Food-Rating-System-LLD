@@ -1,45 +1,66 @@
 package com.example.foodratings.controller;
 
-import com.example.foodratings.model.FoodRequest;
-import com.example.foodratings.model.RatingChangeRequest;
-import com.example.foodratings.service.FoodRatingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.foodratings.model.FoodRequest;
+import com.example.foodratings.service.FoodRatingList;
+import com.example.foodratings.service.FoodRatingsService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/lists")
 public class FoodController 
 {
 
-    private final FoodRatingsService foodService;
+    private final FoodRatingsService listService;
 
     @Autowired
-    public FoodController(FoodRatingsService foodService) 
+    public FoodController(FoodRatingsService listService) 
     {
-        this.foodService = foodService;
+        this.listService = listService;
+    }
+
+    @PostMapping("/{listName}")
+    public ResponseEntity<String> createList(@PathVariable String listName) 
+    {
+        listService.createRatingList(listName);
+        return ResponseEntity.ok("List '" + listName + "' created.");
     }
 
     // --- NEW Endpoint to add a food ---
     // Example: POST http://localhost:8080/api/foods
-    @PostMapping("/foods")
-    public ResponseEntity<Void> addFood(@RequestBody FoodRequest request) 
+    @PostMapping("/{listName}/foods")
+    public ResponseEntity<String> addFoodToList(@PathVariable String listName, @RequestBody FoodRequest request) 
     {
-        foodService.addFood(request.getFood(), request.getCuisine(), request.getRating());
-        return ResponseEntity.ok().build();
+        FoodRatingList list = listService.getRatingList(listName);
+        if (list == null) return ResponseEntity.status(404).body("List not found.");
+
+        list.addFood(request.getFood(), request.getCuisine(), request.getRating());
+        return ResponseEntity.ok("Food added to list '" + listName + "'.");
     }
 
-    @GetMapping("/highest-rated/{cuisine}")
-
-    public String getHighestRated(@PathVariable String cuisine) 
+    @GetMapping("/{listName}/cuisines/{cuisineName}/highest-rated")
+    public String getHighestRated(@PathVariable String listName, @PathVariable String cuisineName) 
     {
-        return foodService.highestRated(cuisine);
+        FoodRatingList list = listService.getRatingList(listName);
+        if (list == null) return "List not found.";
+
+        return list.getHighestRated(cuisineName);
     }
 
-    @PostMapping("/rate/{food}")
-    public ResponseEntity<Void> changeFoodRating(@PathVariable String food, @RequestBody RatingChangeRequest request) 
+    @PostMapping("/{listName}/foods/{foodName}/rate")
+    public ResponseEntity<String> changeRating(@PathVariable String listName, @PathVariable String foodName, @RequestBody FoodRequest request) 
     {
-        foodService.changeRating(food, request.getNewRating());
-        return ResponseEntity.ok().build();
+        FoodRatingList list = listService.getRatingList(listName);
+        if (list == null) return ResponseEntity.status(404).body("List not found.");
+
+        list.changeRating(foodName, request.getRating());
+        return ResponseEntity.ok("Rating updated in list '" + listName + "'.");
     }
 }
