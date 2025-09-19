@@ -1,0 +1,585 @@
+import FoodBankIcon from '@mui/icons-material/Foo                <Typography 
+                variant="h1" 
+                component="h1" 
+                sx={{ 
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  mb: 3,
+                  textShadow: '1px 1px 3px rgba(0,0,0,0.3)',
+                  fontFamily: 'Playfair Display, serif',
+                }}port LocalDiningIcon from '@mui/icons-material/LocalDining';
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import StarIcon from '@mui/icons-material/Star';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { alpha } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import { Link as RouterLink } from 'react-router-dom';
+
+// Sample cuisine data for hero section
+const topCuisines = [
+  { name: "Italian", icon: "🍝", color: "#e74c3c" },
+  { name: "Indian", icon: "🍛", color: "#f39c12" },
+  { name: "Japanese", icon: "🍣", color: "#3498db" },
+  { name: "Mexican", icon: "🌮", color: "#2ecc71" },
+  { name: "Chinese", icon: "🥡", color: "#e67e22" },
+];
+
+const Home = () => {
+  return (
+    <Box>
+      {/* Hero Section */}
+      <Box 
+        sx={{ 
+          position: 'relative',
+          height: '75vh',
+          minHeight: 500,
+          maxHeight: 800,
+          display: 'flex',
+          alignItems: 'center',
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1350&q=80)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          mb: 8,
+          overflow: 'hidden',
+        }}
+      >
+        <Container maxWidth="lg">
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={7}>
+              <Typography 
+                variant="h1" 
+                component="h1" 
+                sx={{ 
+                  color: 'white',
+                  fontWeight: 700,
+                  mb: 3,
+                  textShadow: '1px 1px 3px rgba(0,0,0,0.3)',
+                  fontFamily: 'Playfair Display, serif',
+                }}
+              >
+                Culinary Excellence <br/>
+                <Box component="span" sx={{ color: '#ff9800' }}>Rated & Ranked</Box>
+              </Typography>
+              
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  color: 'rgba(255,255,255,0.9)',
+                  mb: 4,
+                  fontWeight: 300,
+                  maxWidth: 600,
+                }}
+              >
+                Discover the finest cuisines and top-rated dishes from around the world.
+              </Typography>
+              
+              <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+                <Button 
+                  variant="contained" 
+                  color="primary"
+                  size="large"
+                  component={RouterLink}
+                  to="/tenants"
+                  sx={{ 
+                    fontWeight: 'bold',
+                    py: 1.5,
+                    px: 4,
+                    fontSize: '1.1rem',
+                    borderRadius: 2,
+                  }}
+                  startIcon={<RestaurantMenuIcon />}
+                >
+                  Explore Ratings
+                </Button>
+                <Button 
+                  variant="outlined" 
+                  color="inherit"
+                  size="large"
+                  href="#how-it-works"
+                  sx={{ 
+                    fontWeight: 'bold',
+                    py: 1.5,
+                    px: 4,
+                    fontSize: '1.1rem',
+                    color: 'white',
+                    borderColor: 'white',
+                    borderRadius: 2,
+                    '&:hover': {
+                      borderColor: 'white',
+                      backgroundColor: 'rgba(255,255,255,0.1)',
+                    }
+                  }}
+                >
+                  Learn More
+                </Button>
+              </Box>
+              
+              {/* Popular cuisine tags */}
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 4 }}>
+                {topCuisines.map((cuisine) => (
+                  <Paper 
+                    key={cuisine.name}
+                    elevation={0}
+                    sx={{ 
+                      px: 2, 
+                      py: 0.8, 
+                      bgcolor: alpha(cuisine.color, 0.2),
+                      color: 'white',
+                      border: '1px solid',
+                      borderColor: alpha(cuisine.color, 0.3),
+                      borderRadius: 3,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                    }}
+                  >
+                    <Box component="span" sx={{ fontSize: '1.2rem' }}>{cuisine.icon}</Box>
+                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                      {cuisine.name}
+                    </Typography>
+                  </Paper>
+                ))}
+              </Box>
+            </Grid>
+            
+            <Grid item xs={12} md={5} sx={{ display: { xs: 'none', md: 'block' } }}>
+              {/* Feature highlight card */}
+              <Paper 
+                elevation={16}
+                sx={{ 
+                  p: 4, 
+                  borderRadius: 4,
+                  background: 'rgba(255,255,255,0.95)',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+                  transform: 'rotate(-3deg)',
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 1 }}>
+                  <StarIcon sx={{ color: '#ffc107', fontSize: 28 }} />
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                    Featured Cuisine
+                  </Typography>
+                </Box>
+                
+                <Typography variant="h4" sx={{ mb: 2, fontFamily: 'Playfair Display, serif' }}>
+                  Japanese
+                </Typography>
+                
+                <Box sx={{ 
+                  p: 2, 
+                  bgcolor: alpha('#f5f5f5', 0.7),
+                  borderRadius: 2,
+                  mb: 3,
+                }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                        Sushi Platter
+                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
+                        <Box sx={{ 
+                          display: 'flex',
+                          color: '#f44336',
+                        }}>
+                          {[...Array(5)].map((_, i) => (
+                            <LocalDiningIcon key={i} sx={{ fontSize: 16 }} />
+                          ))}
+                        </Box>
+                        <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                          19/20
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={4} sx={{ textAlign: 'right' }}>
+                      <Typography 
+                        sx={{ 
+                          display: 'inline-block',
+                          bgcolor: 'primary.main',
+                          color: 'white',
+                          px: 1.5,
+                          py: 0.5,
+                          borderRadius: 1,
+                          fontWeight: 'bold',
+                          fontSize: '0.875rem',
+                        }}
+                      >
+                        TOP RATED
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+                
+                <Button 
+                  fullWidth 
+                  variant="contained" 
+                  color="primary"
+                  component={RouterLink}
+                  to="/tenants"
+                  sx={{ 
+                    borderRadius: 2, 
+                    py: 1.2,
+                    fontWeight: 600,
+                  }}
+                >
+                  View All Ratings
+                </Button>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* How It Works Section */}
+      <Container id="how-it-works">
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Typography 
+            variant="overline" 
+            component="div"
+            sx={{ 
+              color: 'primary.main', 
+              fontWeight: 600, 
+              letterSpacing: 1.5,
+              mb: 1,
+            }}
+          >
+            EASY TO USE
+          </Typography>
+          <Typography 
+            variant="h2" 
+            component="h2" 
+            sx={{ 
+              mb: 2,
+              fontFamily: 'Playfair Display, serif',
+              position: 'relative',
+              display: 'inline-block',
+              '&:after': {
+                content: '""',
+                position: 'absolute',
+                bottom: -10,
+                left: '30%',
+                width: '40%',
+                height: 3,
+                backgroundColor: 'primary.main',
+                borderRadius: 3,
+              }
+            }}
+          >
+            How It Works
+          </Typography>
+          
+          <Typography 
+            variant="subtitle1" 
+            sx={{ 
+              mt: 4, 
+              mb: 8, 
+              maxWidth: 700, 
+              mx: 'auto',
+              color: 'text.secondary',
+            }}
+          >
+            Our culinary rating system makes it easy to discover, rate, and track the finest foods
+            across different cuisines and establishments.
+          </Typography>
+        </Box>
+
+        <Grid container spacing={4} sx={{ mb: 10 }}>
+          <Grid item xs={12} md={6} lg={3}>
+            <Card 
+              elevation={3}
+              sx={{ 
+                height: '100%', 
+                transition: 'all 0.3s',
+                borderRadius: 4,
+                '&:hover': {
+                  transform: 'translateY(-8px)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                }
+              }}
+            >
+              <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                <Box 
+                  sx={{ 
+                    bgcolor: alpha('#ff9800', 0.1),
+                    color: 'primary.main',
+                    width: 70,
+                    height: 70,
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <StorefrontIcon fontSize="large" />
+                </Box>
+                <Typography variant="h5" component="h3" sx={{ mb: 2, fontWeight: 600 }}>
+                  Browse Tenants
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  Explore different food tenants and cuisines from around the world, each with their own unique selection of foods.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} md={6} lg={3}>
+            <Card 
+              elevation={3}
+              sx={{ 
+                height: '100%', 
+                transition: 'all 0.3s',
+                borderRadius: 4,
+                '&:hover': {
+                  transform: 'translateY(-8px)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                }
+              }}
+            >
+              <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                <Box 
+                  sx={{ 
+                    bgcolor: alpha('#4caf50', 0.1),
+                    color: '#4caf50',
+                    width: 70,
+                    height: 70,
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <RestaurantIcon fontSize="large" />
+                </Box>
+                <Typography variant="h5" component="h3" sx={{ mb: 2, fontWeight: 600 }}>
+                  Discover Foods
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  Find delicious foods with detailed information and see how they rank compared to others in their category.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} md={6} lg={3}>
+            <Card 
+              elevation={3}
+              sx={{ 
+                height: '100%', 
+                transition: 'all 0.3s',
+                borderRadius: 4,
+                '&:hover': {
+                  transform: 'translateY(-8px)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                }
+              }}
+            >
+              <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                <Box 
+                  sx={{ 
+                    bgcolor: alpha('#f44336', 0.1),
+                    color: '#f44336',
+                    width: 70,
+                    height: 70,
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <RateReviewIcon fontSize="large" />
+                </Box>
+                <Typography variant="h5" component="h3" sx={{ mb: 2, fontWeight: 600 }}>
+                  Rate & Review
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  Rate your favorite foods and help others discover the best culinary experiences available.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} md={6} lg={3}>
+            <Card 
+              elevation={3}
+              sx={{ 
+                height: '100%', 
+                transition: 'all 0.3s',
+                borderRadius: 4,
+                '&:hover': {
+                  transform: 'translateY(-8px)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                }
+              }}
+            >
+              <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                <Box 
+                  sx={{ 
+                    bgcolor: alpha('#3f51b5', 0.1),
+                    color: '#3f51b5',
+                    width: 70,
+                    height: 70,
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <FoodBankIcon fontSize="large" />
+                </Box>
+                <Typography variant="h5" component="h3" sx={{ mb: 2, fontWeight: 600 }}>
+                  Top Rated
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  See the highest-rated foods in each cuisine category and discover culinary excellence.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+        
+        {/* Stats Section */}
+        <Box 
+          sx={{ 
+            py: 8, 
+            my: 6, 
+            borderRadius: 4,
+            background: `linear-gradient(45deg, ${alpha('#ff9800', 0.03)} 0%, ${alpha('#f44336', 0.07)} 100%)`,
+            border: '1px solid',
+            borderColor: alpha('#ff9800', 0.1),
+          }}
+        >
+          <Grid container spacing={3} justifyContent="center">
+            <Grid item xs={12} sm={4} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography 
+                  variant="h2" 
+                  sx={{ 
+                    fontWeight: 700, 
+                    color: 'primary.main',
+                    fontFamily: 'Playfair Display, serif', 
+                  }}
+                >
+                  100+
+                </Typography>
+                <Typography variant="h6" sx={{ color: 'text.secondary', mt: 1 }}>
+                  Cuisines
+                </Typography>
+              </Box>
+            </Grid>
+            
+            <Grid item xs={12} sm={4} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography 
+                  variant="h2" 
+                  sx={{ 
+                    fontWeight: 700, 
+                    color: 'primary.main',
+                    fontFamily: 'Playfair Display, serif',  
+                  }}
+                >
+                  5,000+
+                </Typography>
+                <Typography variant="h6" sx={{ color: 'text.secondary', mt: 1 }}>
+                  Food Items
+                </Typography>
+              </Box>
+            </Grid>
+            
+            <Grid item xs={12} sm={4} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography 
+                  variant="h2" 
+                  sx={{ 
+                    fontWeight: 700, 
+                    color: 'primary.main',
+                    fontFamily: 'Playfair Display, serif',  
+                  }}
+                >
+                  50+
+                </Typography>
+                <Typography variant="h6" sx={{ color: 'text.secondary', mt: 1 }}>
+                  Tenants
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+        
+        {/* CTA Section */}
+        <Paper
+          elevation={0}
+          sx={{ 
+            p: { xs: 4, md: 8 },
+            mt: 8, 
+            mb: 6,
+            borderRadius: 4,
+            backgroundImage: `linear-gradient(to right, ${alpha('#ff9800', 0.9)}, ${alpha('#f44336', 0.9)}), url(https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1350&q=80)`,
+            backgroundBlendMode: 'overlay',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            color: 'white',
+            textAlign: 'center',
+          }}
+        >
+          <Typography 
+            variant="h3" 
+            component="h2" 
+            sx={{ 
+              fontWeight: 700, 
+              mb: 3,
+              textShadow: '1px 1px 3px rgba(0,0,0,0.2)',
+              fontFamily: 'Playfair Display, serif',
+            }}
+          >
+            Ready to start rating?
+          </Typography>
+          
+          <Typography variant="h6" sx={{ mb: 4, maxWidth: 600, mx: 'auto', fontWeight: 300 }}>
+            Join our community and start discovering, rating, and sharing your favorite foods today.
+          </Typography>
+          
+          <Button 
+            variant="contained" 
+            color="secondary"
+            size="large"
+            component={RouterLink}
+            to="/tenants"
+            sx={{ 
+              py: 1.5, 
+              px: 4, 
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              borderRadius: 2,
+              backgroundColor: 'white',
+              color: 'primary.main',
+              '&:hover': {
+                backgroundColor: alpha('white', 0.9),
+              }
+            }}
+          >
+            Get Started Now
+          </Button>
+        </Paper>
+      </Container>
+    </Box>
+  );
+};
+
+export default Home;

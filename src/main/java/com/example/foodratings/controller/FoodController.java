@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.foodratings.model.FoodRequest;
 import com.example.foodratings.service.FoodRatingList;
 import com.example.foodratings.service.FoodRatingsService;
+import java.util.Set; 
 
 @RestController
 @RequestMapping("/api/v1/lists")
@@ -24,6 +25,11 @@ public class FoodController
     public FoodController(FoodRatingsService listService) 
     {
         this.listService = listService;
+    }
+
+    @GetMapping
+    public Set<String> getAllListNames() {
+        return listService.getAllListNames();
     }
 
     @PostMapping("/{listName}")

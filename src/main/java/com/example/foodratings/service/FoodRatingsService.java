@@ -3,6 +3,7 @@ package com.example.foodratings.service;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 @Service
 public class FoodRatingsService 
@@ -23,6 +24,11 @@ public class FoodRatingsService
     {
         // Helper to retrieve a specific rating list by its name.
         return ratingLists.get(listName);
+    }
+
+     public Set<String> getAllListNames() 
+    {
+        return ratingLists.keySet();
     }
 }
 

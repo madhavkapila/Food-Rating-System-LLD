@@ -1,0 +1,72 @@
+/* Global styles for the Food Rating System */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fcfaf7;
+}
+
+/* Beautiful transitions for interactive elements */
+a, button, .MuiCard-root, .MuiPaper-root {
+  transition: all 0.3s ease;
+}
+
+/* Elegant hover effects */
+.MuiCard-root:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Food-themed accent borders */
+.accent-border {
+  border-left: 4px solid #BF4904;
+  padding-left: 16px;
+}
+
+.accent-border-bottom {
+  border-bottom: 2px solid #BF4904;
+  padding-bottom: 8px;
+}
+
+/* Custom scrollbar for a more polished look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #BF4904;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8a3000;
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
