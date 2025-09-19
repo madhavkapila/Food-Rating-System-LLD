@@ -1,19 +1,27 @@
 package com.example.foodratings.service;
 
-import com.example.foodratings.model.Foods;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Service;
-import jakarta.annotation.PostConstruct;
-import java.util.*;
+
+import com.example.foodratings.model.Foods;
 
 @Service
 public class FoodRatingsService 
 {
-    private Map<String, SortedSet<Foods>> rankings;
-    private Map<String, Foods> foodsDetails;
+    private final Map<String, SortedSet<Foods>> rankings = new HashMap<>();
+    private final Map<String, Foods> foodsDetails = new HashMap<>();
 
     public void addFood(String foodName, String cuisine, int rating) 
     {
         // If the food already exists, treat this as a rating change.
+
+        // rankings = new HashMap<>();
+        // foodsDetails = new HashMap<>();//Already done above
+        
         if (foodsDetails.containsKey(foodName))
         {
             changeRating(foodName, rating);
@@ -50,11 +58,14 @@ public class FoodRatingsService
     
     public String highestRated(String cuisine)
     {
-        if (!rankings.containsKey(cuisine) || rankings.get(cuisine).isEmpty()) 
+        SortedSet<Foods> foodSet = rankings.get(cuisine);
+
+        if (foodSet == null || foodSet.isEmpty()) 
         {
             return "No foods found for this cuisine.";
         }
-        return rankings.get(cuisine).first().food;
+
+        return foodSet.first().food;
     }
 
     // @PostConstruct // Runs after the service is created and ready
